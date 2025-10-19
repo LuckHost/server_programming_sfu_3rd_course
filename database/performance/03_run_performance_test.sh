@@ -58,7 +58,10 @@ run_query "one_index"
 
 # Перестраиваем существующие индексы
 log "=== ПЕРЕСТРОЙКА ИНДЕКСОВ ==="
+# Сначала обычные индексы
 psql -h localhost -U lab_user -d lab_db -f "$SCRIPT_DIR/indexes/02_rebuild_indexes.sql" 2>&1 | tee -a "$LOG_FILE"
+# Затем частичные индексы (если нужно)
+psql -h localhost -U lab_user -d lab_db -f "$SCRIPT_DIR/indexes/02_rebuild_partial_indexes.sql" 2>&1 | tee -a "$LOG_FILE"
 
 # Тест 3: После перестроения индексов
 log "=== ТЕСТ 3: ПОСЛЕ ПЕРЕСТРОЙКИ ИНДЕКСОВ ==="

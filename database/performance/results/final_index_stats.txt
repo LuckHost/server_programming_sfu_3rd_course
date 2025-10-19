@@ -1,23 +1,23 @@
  schemaname | tablename  |             index_name              | index_scans | tuples_read | tuples_fetched 
 ------------+------------+-------------------------------------+-------------+-------------+----------------
- public     | books      | books_pkey                          |      405068 |      105068 |         105063
- public     | authors    | authors_pkey                        |      315005 |      305005 |         305000
- public     | genres     | genres_pkey                         |      305006 |      305006 |         305006
- public     | users      | users_pkey                          |      203006 |      205015 |         103000
- public     | book_loans | book_loans_pkey                     |      100000 |           0 |              0
+ public     | books      | books_pkey                          |      482428 |      182428 |         182428
+ public     | authors    | authors_pkey                        |      315003 |      305003 |         305003
+ public     | genres     | genres_pkey                         |      305007 |      305007 |         305007
+ public     | users      | users_pkey                          |      203003 |      103003 |         103003
  public     | users      | users_email_key                     |      100000 |           0 |              0
- public     | book_loans | idx_book_loans_user_id              |           4 |           4 |              2
- public     | books      | idx_books_author_id                 |           4 |           4 |              2
- public     | book_loans | idx_book_loans_book_id              |           3 |           3 |              2
- public     | genres     | genres_name_key                     |           2 |           2 |              2
- public     | book_loans | idx_book_loans_return_date_due_date |           2 |       79454 |              0
- public     | book_loans | idx_book_loans_return_date          |           2 |       81700 |              0
+ public     | book_loans | book_loans_pkey                     |      100000 |           0 |              0
+ public     | books      | idx_books_author_id                 |           4 |           4 |              4
+ public     | book_loans | idx_book_loans_user_id              |           4 |           4 |              4
+ public     | book_loans | idx_book_loans_book_id              |           4 |           4 |              4
+ public     | book_loans | idx_book_loans_return_date          |           2 |       82126 |              0
+ public     | book_loans | idx_book_loans_return_date_due_date |           2 |       79652 |              0
  public     | books      | idx_books_search                    |           1 |           1 |              1
- public     | books      | idx_books_publication_year          |           0 |           0 |              0
  public     | books      | idx_books_genre_id                  |           0 |           0 |              0
- public     | users      | idx_users_registration_date         |           0 |           0 |              0
+ public     | genres     | genres_name_key                     |           0 |           0 |              0
  public     | book_loans | idx_book_loans_due_date             |           0 |           0 |              0
  public     | genres     | idx_genres_name                     |           0 |           0 |              0
+ public     | users      | idx_users_registration_date         |           0 |           0 |              0
+ public     | books      | idx_books_publication_year          |           0 |           0 |              0
  public     | book_loans | idx_book_loans_status               |           0 |           0 |              0
 (19 rows)
 
