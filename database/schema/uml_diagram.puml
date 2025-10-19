@@ -1,0 +1,50 @@
+@startuml
+entity books {
+  * id : bigint <<PK>>
+  --
+  * title : varchar
+  * isbn : varchar
+  * publication_year : integer
+  * author_id : bigint <<FK>>
+  * genre_id : bigint <<FK>>
+}
+
+entity authors {
+  * id : bigint <<PK>>
+  --
+  * name : varchar
+  * birth_date : date
+  * country : varchar
+}
+
+entity users {
+  * id : bigint <<PK>>
+  --
+  * email : varchar
+  * first_name : varchar
+  * last_name : varchar
+  * registration_date : date
+}
+
+entity book_loans {
+  * id : bigint <<PK>>
+  --
+  * book_id : bigint <<FK>>
+  * user_id : bigint <<FK>>
+  * loan_date : date
+  * due_date : date
+  * return_date : date
+}
+
+entity genres {
+  * id : bigint <<PK>>
+  --
+  * name : varchar
+  * description : text
+}
+
+books }|--|| authors
+books }|--|| genres
+book_loans }|--|| books
+book_loans }|--|| users
+@enduml
