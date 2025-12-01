@@ -13,11 +13,16 @@ data class Genre(
     val name: String,
 
     @Column(name = "description")
-    val description: String? = null
+    val description: String? = null,
+
+    // Связь один-ко-многим с книгами - УБИРАЕМ ИЗ toString
+    @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val books: MutableList<Book> = mutableListOf()
 ) {
-    constructor() : this(0, "", null)
+    constructor() : this(0, "", null, mutableListOf())
 
     override fun toString(): String {
         return "Genre(id=$id, name='$name', description='$description')"
+        // Убрали booksCount из toString
     }
 }

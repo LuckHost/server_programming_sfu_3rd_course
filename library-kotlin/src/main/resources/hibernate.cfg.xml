@@ -16,9 +16,9 @@
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-        <!-- Echo all executed SQL to stdout -->
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
+        <!-- Echo all executed SQL to stdout - ОТКЛЮЧАЕМ ИЛИ ОСТАВЛЯЕМ ТОЛЬКО ПРИ НЕОБХОДИМОСТИ -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">validate</property>

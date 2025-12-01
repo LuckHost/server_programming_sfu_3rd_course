@@ -5,23 +5,30 @@ import org.hibernate.SessionFactory
 import org.hibernate.cfg.Configuration
 
 object DAO {
-    private val session: ThreadLocal<Session> = ThreadLocal()
-    private val sessionFactory: SessionFactory
+    private val sessionThreadLocal = ThreadLocal<Session>()
+    private var sessionFactory: SessionFactory? = null
 
-    init {
-        try {
-            sessionFactory = Configuration().configure("hibernate.cfg.xml").buildSessionFactory()
-        } catch (ex: Throwable) {
-            System.err.println("Initial SessionFactory creation failed: $ex")
-            throw ExceptionInInitializerError(ex)
+    fun getSessionFactory(): SessionFactory {
+        if (sessionFactory == null || sessionFactory!!.isClosed) {
+            synchronized(this) {
+                if (sessionFactory == null || sessionFactory!!.isClosed) {
+                    try {
+                        sessionFactory = Configuration().configure("hibernate.cfg.xml").buildSessionFactory()
+                    } catch (ex: Throwable) {
+                        System.err.println("Initial SessionFactory creation failed: $ex")
+                        throw ExceptionInInitializerError(ex)
+                    }
+                }
+            }
         }
+        return sessionFactory!!
     }
 
     fun getSession(): Session {
-        var currentSession = session.get()
+        var currentSession = sessionThreadLocal.get()
         if (currentSession == null || !currentSession.isOpen) {
-            currentSession = sessionFactory.openSession()
-            session.set(currentSession)
+            currentSession = getSessionFactory().openSession()
+            sessionThreadLocal.set(currentSession)
         }
         return currentSession
     }
@@ -34,22 +41,56 @@ object DAO {
     }
 
     fun commit() {
-        val currentSession = session.get()
+        val currentSession = sessionThreadLocal.get()
         if (currentSession != null && currentSession.isOpen) {
             val transaction = currentSession.transaction
             if (transaction.isActive) {
-                transaction.commit()
+                try {
+                    transaction.commit()
+                } catch (e: Exception) {
+                    System.err.println("Ошибка при коммите транзакции: ${e.message}")
+                    throw e
+                }
+            }
+        }
+    }
+
+    fun rollback() {
+        val currentSession = sessionThreadLocal.get()
+        if (currentSession != null && currentSession.isOpen) {
+            val transaction = currentSession.transaction
+            if (transaction.isActive) {
+                try {
+                    transaction.rollback()
+                } catch (e: Exception) {
+                    System.err.println("Ошибка при откате транзакции: ${e.message}")
+                }
             }
         }
     }
 
     fun close() {
-        val currentSession = session.get()
+        val currentSession = sessionThreadLocal.get()
         if (currentSession != null && currentSession.isOpen) {
-            currentSession.close()
+            try {
+                if (currentSession.transaction.isActive) {
+                    currentSession.transaction.rollback()
+                }
+                currentSession.close()
+            } catch (e: Exception) {
+                System.err.println("Ошибка при закрытии сессии: ${e.message}")
+            }
         }
-        session.remove()
+        sessionThreadLocal.remove()
     }
 
-    fun getSessionFactory(): SessionFactory = sessionFactory
+    fun shutdown() {
+        try {
+            close()
+            sessionFactory?.close()
+            sessionFactory = null
+        } catch (e: Exception) {
+            System.err.println("Ошибка при остановке DAO: ${e.message}")
+        }
+    }
 }

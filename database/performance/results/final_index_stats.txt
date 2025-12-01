@@ -1,6 +1,6 @@
  schemaname | tablename  |             index_name              | index_scans | tuples_read | tuples_fetched 
 ------------+------------+-------------------------------------+-------------+-------------+----------------
- public     | books      | books_pkey                          |      482428 |      182428 |         182428
+ public     | books      | books_pkey                          |      482690 |      182690 |         182690
  public     | authors    | authors_pkey                        |      315003 |      305003 |         305003
  public     | genres     | genres_pkey                         |      305007 |      305007 |         305007
  public     | users      | users_pkey                          |      203003 |      103003 |         103003
@@ -9,8 +9,8 @@
  public     | books      | idx_books_author_id                 |           4 |           4 |              4
  public     | book_loans | idx_book_loans_user_id              |           4 |           4 |              4
  public     | book_loans | idx_book_loans_book_id              |           4 |           4 |              4
- public     | book_loans | idx_book_loans_return_date          |           2 |       82126 |              0
- public     | book_loans | idx_book_loans_return_date_due_date |           2 |       79652 |              0
+ public     | book_loans | idx_book_loans_return_date          |           2 |       82508 |              0
+ public     | book_loans | idx_book_loans_return_date_due_date |           2 |       80136 |              0
  public     | books      | idx_books_search                    |           1 |           1 |              1
  public     | books      | idx_books_genre_id                  |           0 |           0 |              0
  public     | genres     | genres_name_key                     |           0 |           0 |              0

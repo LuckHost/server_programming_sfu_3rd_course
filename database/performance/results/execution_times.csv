@@ -1,6 +1,6 @@
 test_name,execution_time_ms
-no_indexes,393.776
-one_index,401.987
-rebuilt_indexes,402.070
-all_indexes,399.582
-final_rebuilt,401.764
+no_indexes,394.411
+one_index,400.247
+rebuilt_indexes,400.224
+all_indexes,403.167
+final_rebuilt,399.531

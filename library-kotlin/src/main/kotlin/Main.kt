@@ -7,6 +7,28 @@ fun main() {
     println("=== SFU Library Management System (Kotlin) ===")
 
     try {
+        // Демонстрация ПЗ №4 (базовые методы)
+        demonstrateLab4()
+
+        // Демонстрация ПЗ №5 (Criteria API и DAO)
+        Lab5Demo.demonstrate()
+
+    } catch (e: Exception) {
+        System.err.println("Ошибка: ${e.message}")
+        e.printStackTrace()
+    } finally {
+        // Корректно закрываем Hibernate только в самом конце
+        DAO.getSessionFactory().close()
+        println("\nSessionFactory закрыт корректно")
+    }
+
+    println("\n=== Программа завершена ===")
+}
+
+private fun demonstrateLab4() {
+    println("\n--- ДЕМОНСТРАЦИЯ ПЗ №4 ---")
+
+    try {
         // Тест 1: Получение имени автора по ID
         println("\n1. Тест получения имени автора:")
         val authorName = TestSrvs.getAuthorName(1L)
@@ -20,46 +42,12 @@ fun main() {
             println("  - $email")
         }
 
-        // Тест 3: Создание нового жанра (уникальное имя)
+        // Тест 3: Создание нового жанра
         println("\n3. Тест создания нового жанра:")
-        val uniqueGenreName = "Биотехнологии_${System.currentTimeMillis()}"
-        TestSrvs.createGenre(uniqueGenreName, "Книги о биотехнологиях и генной инженерии")
-
-        // Тест 4: Попытка создать существующий жанр
-        println("\n4. Тест создания существующего жанра:")
-        TestSrvs.createGenre("Фантастика", "Попытка создать дубликат")
-
-        // Тест 5: Создание жанра безопасным методом
-        println("\n5. Тест безопасного создания жанра:")
-        TestSrvs.createGenreSafe("Космическая опера", "Эпические космические саги")
-
-        // Тест 6: Создание нового пользователя
-        println("\n6. Тест создания нового пользователя:")
-        val uniqueEmail = "testuser_${System.currentTimeMillis()}@example.com"
-        TestSrvs.createUser(uniqueEmail, "Тест", "Пользователь")
-
-        // Дополнительный тест: получение нескольких авторов
-        println("\n7. Дополнительный тест авторов:")
-        for (i in 1L..3L) {
-            val name = TestSrvs.getAuthorName(i)
-            println("Автор с ID=$i: $name")
-        }
-
-        // Тест 8: Получение всех жанров
-        println("\n8. Тест получения всех жанров:")
-        val genres = TestSrvs.getGenreNames()
-        println("Все жанры в системе (первые 5):")
-        genres.take(5).forEach { genre ->
-            println("  - $genre")
-        }
+        val uniqueGenreName = "ТестовыйЖанр_${System.currentTimeMillis()}"
+        TestSrvs.createGenre(uniqueGenreName, "Описание тестового жанра")
 
     } catch (e: Exception) {
-        System.err.println("Ошибка: ${e.message}")
-        e.printStackTrace()
-    } finally {
-        // Корректно закрываем Hibernate
-        DAO.getSessionFactory().close()
+        System.err.println("Ошибка в демонстрации ПЗ №4: ${e.message}")
     }
-
-    println("\n=== Программа завершена ===")
 }

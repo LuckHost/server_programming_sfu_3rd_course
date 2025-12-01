@@ -20,10 +20,14 @@ data class User(
     val lastName: String,
 
     @Column(name = "registration_date", nullable = false)
-    val registrationDate: LocalDate
-) {
-    constructor() : this(0, "", "", "", LocalDate.now())
+    val registrationDate: LocalDate,
 
+    // Связь один-ко-многим с выдачами книг
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val bookLoans: MutableList<BookLoan> = mutableListOf()
+) {
+    constructor() : this(0, "", "", "", LocalDate.now(), mutableListOf())
+    
     override fun toString(): String {
         return "User(id=$id, email='$email', firstName='$firstName', lastName='$lastName', registrationDate=$registrationDate)"
     }

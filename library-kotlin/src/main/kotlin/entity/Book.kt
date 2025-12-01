@@ -18,15 +18,23 @@ data class Book(
     @Column(name = "publication_year")
     val publicationYear: Int? = null,
 
-    @Column(name = "author_id", nullable = false)
-    val authorId: Long,
+    // Связь многие-к-одному с автором
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    var author: Author? = null,
 
-    @Column(name = "genre_id", nullable = false)
-    val genreId: Long
+    // Связь многие-к-одному с жанром
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id", nullable = false)
+    var genre: Genre? = null,
+
+    // Связь один-ко-многим с выдачами
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val bookLoans: MutableList<BookLoan> = mutableListOf()
 ) {
-    constructor() : this(0, "", null, null, 0, 0)
-
+    constructor() : this(0, "", null, null, null, null, mutableListOf())
+    
     override fun toString(): String {
-        return "Book(id=$id, title='$title', isbn='$isbn', publicationYear=$publicationYear, authorId=$authorId, genreId=$genreId)"
+        return "Book(id=$id, title='$title', isbn='$isbn', publicationYear=$publicationYear, authorId=${author?.id}, genreId=${genre?.id})"
     }
 }

@@ -1,6 +1,6 @@
  schemaname | tablename  |    column_name    | index_scans | tuples_read | tuples_fetched 
 ------------+------------+-------------------+-------------+-------------+----------------
- public     | books      | id                |      482428 |      182428 |         182428
+ public     | books      | id                |      482690 |      182690 |         182690
  public     | authors    | id                |      315003 |      305003 |         305003
  public     | genres     | id                |      305007 |      305007 |         305007
  public     | users      | id                |      203003 |      103003 |         103003
@@ -9,9 +9,9 @@
  public     | book_loans | user_id           |           4 |           4 |              4
  public     | books      | author_id         |           4 |           4 |              4
  public     | book_loans | book_id           |           4 |           4 |              4
- public     | book_loans | return_date       |           2 |       79652 |              0
- public     | book_loans | return_date       |           2 |       82126 |              0
- public     | book_loans | due_date          |           2 |       79652 |              0
+ public     | book_loans | return_date       |           2 |       80136 |              0
+ public     | book_loans | return_date       |           2 |       82508 |              0
+ public     | book_loans | due_date          |           2 |       80136 |              0
  public     | books      | publication_year  |           1 |           1 |              1
  public     | books      | genre_id          |           1 |           1 |              1
  public     | books      | genre_id          |           0 |           0 |              0
