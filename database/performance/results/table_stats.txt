@@ -1,9 +1,9 @@
  schemaname | table_name | row_count | total_size | table_size | index_size 
 ------------+------------+-----------+------------+------------+------------
  public     | books      |    305010 | 51 MB      | 36 MB      | 15 MB
- public     | book_loans |    103010 | 14 MB      | 6568 kB    | 7424 kB
- public     | users      |    102010 | 19 MB      | 9344 kB    | 10112 kB
- public     | authors    |     10510 | 1144 kB    | 872 kB     | 272 kB
+ public     | book_loans |    103010 | 14 MB      | 6568 kB    | 7432 kB
+ public     | users      |    102010 | 19 MB      | 9344 kB    | 10120 kB
+ public     | authors    |     10510 | 1152 kB    | 872 kB     | 280 kB
  public     | genres     |        10 | 64 kB      | 8192 bytes | 56 kB
 (5 rows)
 

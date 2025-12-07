@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Консольный аппендер -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Файловый аппендер (опционально) -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/library-system.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Уровни логирования для разных пакетов -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.SQL" level="WARN"/>
+    <logger name="org.hibernate.type.descriptor.sql" level="WARN"/>
+    <logger name="org.hibernate.stat" level="WARN"/>
+    <logger name="org.hibernate.engine" level="WARN"/>
+    <logger name="org.hibernate.cache" level="WARN"/>
+
+    <!-- Spring логирование -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.transaction" level="WARN"/>
+    <logger name="org.springframework.orm" level="WARN"/>
+
+    <!-- Наш проект - можно оставить INFO или DEBUG для отладки -->
+    <logger name="edu.sfu" level="INFO"/>
+
+    <!-- Корневой логгер -->
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+        <!-- <appender-ref ref="FILE"/> для записи в файл -->
+    </root>
+</configuration>

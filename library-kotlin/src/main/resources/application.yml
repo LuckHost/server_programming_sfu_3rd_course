@@ -11,6 +11,23 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 2
 
+  logging:
+    level:
+      # Отключаем DEBUG логи Hibernate
+      org.hibernate: WARN
+      org.hibernate.SQL: WARN
+      org.hibernate.type.descriptor.sql: WARN
+      org.hibernate.stat: WARN
+      # Spring логирование
+      org.springframework: INFO
+      org.springframework.transaction: WARN
+      org.springframework.orm: WARN
+      # Наш проект
+      edu.sfu: INFO
+
+    pattern:
+      console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
   jpa:
     hibernate:
       ddl-auto: validate
