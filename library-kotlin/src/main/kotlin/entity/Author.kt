@@ -19,7 +19,7 @@ data class Author(
     @Column(name = "country")
     val country: String? = null,
 
-    // Связь один-ко-многим с книгами - УБИРАЕМ ИЗ toString
+    // Связь один-ко-многим с книгами
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     val books: MutableList<Book> = mutableListOf()
 ) {
@@ -32,15 +32,5 @@ data class Author(
 
     override fun toString(): String {
         return "Author(id=$id, name='$name', birthDate=$birthDate, country='$country')"
-        // Убрали booksCount из toString чтобы избежать LazyInitializationException
-    }
-
-    // Дополнительный метод для безопасного получения количества книг
-    fun getBooksCountSafe(): Int {
-        return try {
-            books.size
-        } catch (e: Exception) {
-            0 // Возвращаем 0 если коллекция не инициализирована
-        }
     }
 }

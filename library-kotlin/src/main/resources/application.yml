@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: library-management-system
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lab_db
+    username: lab_user
+    password: lab_password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        query:
+          in_clause_parameter_padding: true
+    show-sql: false
+
+  jackson:
+    serialization:
+      indent-output: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api

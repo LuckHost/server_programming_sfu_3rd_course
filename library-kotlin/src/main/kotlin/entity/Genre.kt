@@ -15,7 +15,7 @@ data class Genre(
     @Column(name = "description")
     val description: String? = null,
 
-    // Связь один-ко-многим с книгами - УБИРАЕМ ИЗ toString
+    // Связь один-ко-многим с книгами
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     val books: MutableList<Book> = mutableListOf()
 ) {
@@ -23,6 +23,5 @@ data class Genre(
 
     override fun toString(): String {
         return "Genre(id=$id, name='$name', description='$description')"
-        // Убрали booksCount из toString
     }
 }
